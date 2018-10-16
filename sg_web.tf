@@ -1,4 +1,4 @@
-resource "aws_security_group" "mysg" {
+resource "aws_security_group" "mywebsg" {
     name = "web-server-sg"
   }
 
@@ -9,7 +9,7 @@ resource "aws_security_group_rule" "allow_webssh" {
     protocol        = "tcp"
     cidr_blocks = ["${aws_eip.mywebeip.public_ip}/32"]
 
-    security_group_id = "${aws_security_group.mysg.id}"
+    security_group_id = "${aws_security_group.mywebsg.id}"
   }
 
 resource "aws_security_group_rule" "allow_webhttp" {
@@ -19,7 +19,7 @@ resource "aws_security_group_rule" "allow_webhttp" {
   protocol        = "tcp"
   cidr_blocks = ["${aws_eip.mywebeip.public_ip}/32"]
 
-  security_group_id = "${aws_security_group.mysg.id}"
+  security_group_id = "${aws_security_group.mywebsg.id}"
 }
 
 resource "aws_security_group_rule" "allow_webhttps" {
@@ -29,5 +29,5 @@ resource "aws_security_group_rule" "allow_webhttps" {
   protocol        = "tcp"
   cidr_blocks = ["${aws_eip.mywebeip.public_ip}/32"]
 
-  security_group_id = "${aws_security_group.mysg.id}"
+  security_group_id = "${aws_security_group.mywebsg.id}"
 }
